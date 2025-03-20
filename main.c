@@ -12,7 +12,7 @@
 
 int main(void){  
     // PINOUT
-    counter = 0;
+    unsigned long counter = 0;
 
     DDRB &= ~(1<<0);
     PORTB |= (1<<0);
@@ -26,13 +26,33 @@ int main(void){
     while (1){
         _delay_ms(1);
         counter++;
-        PORTB |= (1<<1);
-        PORTB &= ~(1<<4);
 
-        if(PINB & (1<<PINB1)){
+        PORTB &= ~(1<<2);
+        PORTB &= ~(1<<3);
+        PORTB |= (1<<1);
+        _delay_ms(5000);
+
+        PORTB &= ~(1<<1);
+        PORTB &= ~(1<<3);
+        PORTB |= (1<<2);
+        _delay_ms(3000);
+
+        PORTB &= ~(1<<1);
+        PORTB &= ~(1<<2);
+        PORTB |= (1<<3);
+        _delay_ms(1000);
+
+        /*if(!(PINB & (1<<PINB0))){
+            PORTB |= (1<<3);
             PORTB |= (1<<4);
             PORTB &= ~(1<<1);
-        }
+            PORTB &= ~(1<<5);
+        }else{
+            PORTB |= (1<<1);
+            PORTB |= (1<<5);
+            PORTB &= ~(1<<4);
+            PORTB &= ~(1<<3);
+        }*/
 
 
     }
