@@ -27,33 +27,42 @@ int main(void){
         _delay_ms(1);
         counter++;
 
-        PORTB &= ~(1<<2);
-        PORTB &= ~(1<<3);
-        PORTB |= (1<<1);
-        _delay_ms(5000);
+        if((!(PINB & (1<<PINB0))) && (counter<=32000)){
+            counter = 32000;
+        }
 
-        PORTB &= ~(1<<1);
-        PORTB &= ~(1<<3);
-        PORTB |= (1<<2);
-        _delay_ms(3000);
-
-        PORTB &= ~(1<<1);
-        PORTB &= ~(1<<2);
-        PORTB |= (1<<3);
-        _delay_ms(1000);
-
-        /*if(!(PINB & (1<<PINB0))){
-            PORTB |= (1<<3);
-            PORTB |= (1<<4);
-            PORTB &= ~(1<<1);
-            PORTB &= ~(1<<5);
-        }else{
-            PORTB |= (1<<1);
-            PORTB |= (1<<5);
-            PORTB &= ~(1<<4);
+        if(counter<=42000){
+            PORTB &= ~(1<<2);
             PORTB &= ~(1<<3);
-        }*/
-
+            PORTB |= (1<<1);
+            PORTB &= ~(1<<4);
+            PORTB |= (1<<5);
+        }else if(counter<=45000){
+            PORTB &= ~(1<<1);
+            PORTB &= ~(1<<3);
+            PORTB |= (1<<2);
+        }else if(counter<=57000){
+            PORTB &= ~(1<<1);
+            PORTB &= ~(1<<2);
+            PORTB |= (1<<3);
+            PORTB &= ~(1<<5);
+            PORTB |= (1<<4);
+        }else if(counter<=60000){
+            PORTB &= ~(1<<4);
+            PORTB |= (1<<5);
+            _delay_ms(500);
+            PORTB &= ~(1<<5);
+            _delay_ms(500);
+            PORTB |= (1<<5);
+            _delay_ms(500);
+            PORTB &= ~(1<<5);
+            _delay_ms(500);
+            PORTB |= (1<<5);
+            _delay_ms(500);
+            PORTB &= ~(1<<5);
+            _delay_ms(500);
+            counter =0;        
+        }
 
     }
 }
